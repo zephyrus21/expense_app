@@ -1,7 +1,7 @@
-import './new_transaction.dart';
-import './transaction_list.dart';
 import 'package:flutter/material.dart';
 import '../models/transaction.dart';
+import './new_transaction.dart';
+import './transaction_list.dart';
 
 class UserTransaction extends StatefulWidget {
   UserTransaction({Key? key}) : super(key: key);
@@ -25,13 +25,29 @@ class _UserTransactionState extends State<UserTransaction> {
       date: DateTime.now(),
     )
   ];
+
+  void _addNewTransaction(String txTitle, double txAmmount) {
+    final newTx = Transaction(
+      id: DateTime.now().toString(),
+      title: txTitle,
+      ammount: txAmmount,
+      date: DateTime.now(),
+    );
+
+    setState(() {
+      _userTransactions.add(newTx);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        NewTransaction(),
-        TransactionList(_userTransactions),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          NewTransaction(_addNewTransaction),
+          TransactionList(_userTransactions),
+        ],
+      ),
     );
   }
 }
