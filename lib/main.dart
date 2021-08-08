@@ -31,18 +31,31 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Container(
-            width: double.infinity,
-            child: Card(
-              child: Text(
-                'Chart',
-              ),
-            ),
-          ),
           Column(
             children: transaction
                 .map((e) => Card(
-                      child: Text(e.title),
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 15),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 8),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                              width: 2,
+                              // style: BorderStyle
+                            )),
+                            child: Text(e.ammount.toString()),
+                          ),
+                          Column(
+                            children: [
+                              Text(e.title),
+                              Text(e.date.toString()),
+                            ],
+                          ),
+                        ],
+                      ),
                     ))
                 .toList(),
           ),
